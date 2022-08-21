@@ -12,7 +12,7 @@ const StickyButton: React.FC<{
   buttonClass: string;
 }> = props => {
   return (
-    <div className={`${classes.buttonContainer} ${props.containerClass}`}>
+    <div className={`${classes['button-container']} ${props.containerClass}`}>
       <Tooltip title={props.tooltipText}>
         <button
           className={`${classes.button} ${props.buttonClass}`}
