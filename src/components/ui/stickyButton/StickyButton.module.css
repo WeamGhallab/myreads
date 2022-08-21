@@ -1,0 +1,12 @@
+.buttonContainer {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+}
+
+.button {
+  outline: none;
+  margin: 0;
+  border: none;
+  cursor: pointer;
+}
