@@ -1,5 +1,4 @@
 import { Book } from "../../../core/models/book-model";
-import BookItem from "../../shared/bookItem/BookItem";
 import BookShelf from "../../shared/bookShelf/BookShelf";
 import classes from "./AllBooks.module.css";
 
