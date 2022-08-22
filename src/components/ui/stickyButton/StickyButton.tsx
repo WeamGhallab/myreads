@@ -5,17 +5,19 @@ import classes from "./StickyButton.module.css";
 import { Tooltip } from "@mui/material";
 
 const StickyButton: React.FC<{
-  containerClass:string;
+  containerClass: string;
   tooltipText: string;
   children: any;
   onClick: () => void;
-  buttonClass: string;
+  buttonColor: string;
 }> = props => {
   return (
-    <div className={`${classes['button-container']} ${props.containerClass}`}>
+    <div className={`${classes["button-container"]} ${props.containerClass}`}>
       <Tooltip title={props.tooltipText}>
         <button
-          className={`${classes.button} ${props.buttonClass}`}
+          type="button"
+          style={{ backgroundColor: props.buttonColor }}
+          className={classes.button}
           onClick={props.onClick}
         >
           {props.children}
@@ -31,6 +33,6 @@ StickyButton.propTypes = {
   children: PropTypes.any.isRequired,
   tooltipText: PropTypes.string.isRequired,
   containerClass: PropTypes.string.isRequired,
-  buttonClass: PropTypes.string.isRequired,
+  buttonColor: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired
 };
