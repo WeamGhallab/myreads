@@ -27,7 +27,7 @@ const BookItemDetails: React.FC = () => {
       };
 
       updateBook().catch(error => {
-        dispatch(notificationsActions.getError(error));
+        dispatch(notificationsActions.getError(null));
       });
     }
   }, [id, dispatch, books]);

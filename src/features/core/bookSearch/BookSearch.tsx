@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 
@@ -13,9 +13,36 @@ import BookItem from "../../shared/bookItem/BookItem";
 const BookSearch: React.FC = () => {
   const history = useHistory();
   const searchInputRef = useRef<HTMLInputElement | null>(null);
+  const [searchInputValue, setSearchInputValue] = useState<string>("");
   const [filteredBooks, setfilteredBooks] = useState<Book[]>([]);
   const showSpinner = useAppSelector(state => state.notifications.showSpinner);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    let timeoutRef: any = null;
+    if (searchInputValue.trim()) {
+      const updateBook = async () => {
+        dispatch(notificationsActions.sendRequest());
+        const data = await search(searchInputValue);
+        if (data.error) {
+          throw new Error("No Results");
+        }
+        dispatch(notificationsActions.clear());
+        console.log(data);
+        setfilteredBooks(data);
+      };
+      timeoutRef = setTimeout(() => {
+        updateBook().catch(error => {
+          dispatch(notificationsActions.getError(error.message));
+        });
+      }, 1000);
+      console.log("add");
+    }
+    return () => {
+      console.log("cleanup");
+      timeoutRef && clearTimeout(timeoutRef);
+    };
+  }, [searchInputValue, dispatch]);
 
   const closeSearchHandler = () => {
     history.push("/");
@@ -25,18 +52,7 @@ const BookSearch: React.FC = () => {
     const inputData =
       searchInputRef && searchInputRef.current && searchInputRef.current.value;
     if (inputData && inputData.trim()) {
-      const updateBook = async () => {
-        dispatch(notificationsActions.sendRequest());
-        const data = await search(inputData, 8);
-        dispatch(notificationsActions.clear());
-        console.log(data);
-        setfilteredBooks(data);
-      };
-      try {
-        updateBook();
-      } catch (error) {
-        dispatch(notificationsActions.getError(error));
-      }
+      setSearchInputValue(inputData);
     }
   };
 
@@ -60,6 +76,7 @@ const BookSearch: React.FC = () => {
       <div className={classes["search-books-results"]}>
         <ol className={classes["books-grid"]}>
           {!showSpinner &&
+            filteredBooks &&
             filteredBooks.length > 0 &&
             filteredBooks.map(item => (
               <li key={item.id}>
