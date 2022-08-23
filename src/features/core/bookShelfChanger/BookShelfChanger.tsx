@@ -8,16 +8,17 @@ import { updateBookdata } from "../../../store/actions/books-actions";
 import { BookShelvesEnum } from "../../../core/enums/bookShelves-enum";
 
 const BookShelfChanger: React.FC<{ book: Book }> = props => {
+  const { book } = props;
   const [selectedShelfValue, setSelectedShelfValue] = useState(
-    props.book.shelf || "none"
+    book.shelf || "none"
   );
   const dispatch = useAppDispatch();
   const bookShelves = useAppSelector(state => state.books.bookShelves);
 
   const changeBookShelfHandler = (event: any) => {
     const selectedValue = event.target.value;
-    if (selectedValue !== props.book.shelf) {
-      dispatch(updateBookdata(props.book, selectedValue));
+    if (selectedValue !== book.shelf) {
+      dispatch(updateBookdata(book, selectedValue));
     }
     setSelectedShelfValue(selectedValue);
   };
@@ -28,7 +29,7 @@ const BookShelfChanger: React.FC<{ book: Book }> = props => {
       onChange={changeBookShelfHandler}
       value={selectedShelfValue}
     >
-      <option value="none" disabled>
+      <option value="" disabled>
         Move to...
       </option>
       {bookShelves.map(item => (
@@ -36,9 +37,7 @@ const BookShelfChanger: React.FC<{ book: Book }> = props => {
           {BookShelvesEnum[item as keyof typeof BookShelvesEnum] || item}
         </option>
       ))}
-      <option value="none">
-        None
-      </option>
+      <option value="none">None</option>
     </select>
   );
 };

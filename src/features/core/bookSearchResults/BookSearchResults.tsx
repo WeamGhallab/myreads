@@ -10,7 +10,7 @@ import classes from "./BookSearchResults.module.css";
 import BookItem from "../../shared/bookItem/BookItem";
 
 const BookSearchResults: React.FC<{ searchValue: string }> = props => {
-  const searchInputValue = props.searchValue;
+  const { searchValue } = props;
   const [filteredBooks, setfilteredBooks] = useState<Book[]>([]);
   const showSpinner = useAppSelector(state => state.notifications.showSpinner);
   const dispatch = useAppDispatch();
@@ -19,27 +19,27 @@ const BookSearchResults: React.FC<{ searchValue: string }> = props => {
     let timeoutRef: any = null;
     const updateBook = async () => {
       dispatch(notificationsActions.sendRequest());
-      const data = await search(searchInputValue);
+      const data: any = await search(searchValue);
       if (data.error) {
         throw new Error("No Results");
       }
       dispatch(notificationsActions.clear());
       setfilteredBooks(data);
     };
-    if (searchInputValue) {
+    if (searchValue) {
       timeoutRef = setTimeout(() => {
         updateBook().catch(error => {
           dispatch(notificationsActions.getError(error.message));
           setfilteredBooks([]);
         });
-      }, 1000);
+      }, 800);
     } else {
       setfilteredBooks([]);
     }
     return () => {
       timeoutRef && clearTimeout(timeoutRef);
     };
-  }, [searchInputValue, dispatch]);
+  }, [searchValue, dispatch]);
 
   return (
     <ol className={classes["books-grid"]}>

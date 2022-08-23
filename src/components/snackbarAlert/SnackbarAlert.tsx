@@ -8,14 +8,11 @@ const SnackbarAlert: React.FC<{
   show: boolean;
   onClose: () => void;
 }> = props => {
+  const { show, onClose, status, message } = props;
   return (
-    <Snackbar open={props.show} autoHideDuration={3000} onClose={props.onClose}>
-      <Alert
-        onClose={props.onClose}
-        severity={props.status}
-        sx={{ width: "100%" }}
-      >
-        {props.message}
+    <Snackbar open={show} autoHideDuration={3000} onClose={onClose}>
+      <Alert onClose={onClose} severity={status} sx={{ width: "100%" }}>
+        {message}
       </Alert>
     </Snackbar>
   );

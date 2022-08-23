@@ -8,6 +8,8 @@ import dummyBookImage from "../../../assets/images/book.jpg";
 import BookShelfChanger from "../../core/bookShelfChanger/BookShelfChanger";
 
 const BookItem: React.FC<{ book: Book }> = props => {
+  const { book } = props;
+
   return (
     <div className={classes["book"]}>
       <div className={classes["book-top"]}>
@@ -15,21 +17,19 @@ const BookItem: React.FC<{ book: Book }> = props => {
           className={classes["book-cover"]}
           style={{
             backgroundImage: `url(${
-              props.book.imageLinks
-                ? props.book.imageLinks.thumbnail
-                : dummyBookImage
+              book.imageLinks ? book.imageLinks.thumbnail : dummyBookImage
             })`
           }}
         ></div>
         <div className={classes["book-shelf-changer"]}>
-          <BookShelfChanger book={props.book} />
+          <BookShelfChanger book={book} />
         </div>
       </div>
       <div className={classes["book-title"]}>
-        <Link to={`/books/${props.book.id}`}>{props.book.title}</Link>
+        <Link to={`/books/${book.id}`}>{book.title}</Link>
       </div>
-      {props.book.authors &&
-        props.book.authors.map(name => (
+      {book.authors &&
+        book.authors.map(name => (
           <div key={name} className={classes["book-authors"]}>
             {name}
           </div>

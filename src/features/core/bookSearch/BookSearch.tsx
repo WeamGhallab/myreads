@@ -40,7 +40,6 @@ const BookSearch: React.FC = () => {
           disabled={showSpinner}
           buttonWidth={50}
           buttonColor="#fff"
-          isButtonPositionRight={false}
           ref={searchInputRef}
           buttonTooltipText="Close"
           inputPlaceholder="Search by title, author, or ISBN"

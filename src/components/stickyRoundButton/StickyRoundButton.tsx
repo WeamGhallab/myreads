@@ -13,23 +13,32 @@ const StickyRoundButton: React.FC<{
   buttonColor: string;
   buttonRadius: number;
 }> = props => {
+  const {
+    bottom,
+    right,
+    tooltipText,
+    buttonColor,
+    buttonRadius,
+    onClick,
+    children
+  } = props;
   return (
     <div
       className={classes["button-container"]}
-      style={{ bottom: props.bottom, right: props.right }}
+      style={{ bottom: bottom, right: right }}
     >
-      <Tooltip title={props.tooltipText}>
+      <Tooltip title={tooltipText}>
         <button
           type="button"
           style={{
-            backgroundColor: props.buttonColor,
-            width: props.buttonRadius,
-            height: props.buttonRadius
+            backgroundColor: buttonColor,
+            width: buttonRadius,
+            height: buttonRadius
           }}
           className={classes.button}
-          onClick={props.onClick}
+          onClick={onClick}
         >
-          {props.children}
+          {children}
         </button>
       </Tooltip>
     </div>

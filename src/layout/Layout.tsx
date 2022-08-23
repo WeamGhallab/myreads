@@ -7,6 +7,7 @@ import SnackbarAlert from "../components/snackbarAlert/SnackbarAlert";
 import classes from "./Layout.module.css";
 
 const Layout: React.FC<{ children: any }> = props => {
+  const { children } = props;
   const notificationMessage = useAppSelector(
     state => state.notifications.message
   );
@@ -24,7 +25,7 @@ const Layout: React.FC<{ children: any }> = props => {
   };
   return (
     <div className={classes.container}>
-      <main>{props.children}</main>
+      <main>{children}</main>
       <SnackbarAlert
         message={notificationMessage}
         status={notificationStatus}

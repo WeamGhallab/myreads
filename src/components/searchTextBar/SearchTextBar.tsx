@@ -10,7 +10,6 @@ const SearchTextBar = React.forwardRef<
     children: any;
     onClickButton: () => void;
     onChangeText: () => void;
-    isButtonPositionRight: boolean;
     buttonTooltipText: string;
     buttonColor: string;
     buttonWidth: number;
@@ -18,28 +17,39 @@ const SearchTextBar = React.forwardRef<
     disabled: boolean;
   }
 >((props, ref) => {
+  const {
+    buttonColor,
+    children,
+    onChangeText,
+    onClickButton,
+    inputPlaceholder,
+    buttonTooltipText,
+    buttonWidth,
+    disabled
+  } = props;
+
   return (
     <div className={classes["search-bar"]}>
-      <Tooltip title={props.buttonTooltipText}>
+      <Tooltip title={buttonTooltipText}>
         <button
           type="button"
           className={classes["button-search"]}
-          onClick={props.onClickButton}
+          onClick={onClickButton}
           style={{
-            backgroundColor: props.buttonColor,
-            width: props.buttonWidth
+            backgroundColor: buttonColor,
+            width: buttonWidth
           }}
         >
-          {props.children}
+          {children}
         </button>
       </Tooltip>
       <div className={classes["search-input-wrapper"]}>
         <input
-          disabled={props.disabled}
-          onChange={props.onChangeText}
+          disabled={disabled}
+          onChange={onChangeText}
           ref={ref}
           type="text"
-          placeholder={props.inputPlaceholder}
+          placeholder={inputPlaceholder}
         />
       </div>
     </div>
@@ -56,6 +66,5 @@ SearchTextBar.propTypes = {
   buttonTooltipText: PropTypes.string.isRequired,
   buttonColor: PropTypes.string.isRequired,
   buttonWidth: PropTypes.number.isRequired,
-  isButtonPositionRight: PropTypes.bool.isRequired,
   disabled: PropTypes.bool.isRequired
 };
