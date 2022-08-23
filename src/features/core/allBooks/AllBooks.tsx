@@ -2,7 +2,7 @@ import { CircularProgress } from "@mui/material";
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-import StickyButton from "../../../components/ui/stickyButton/StickyButton";
+import StickyRoundButton from "../../../components/stickyRoundButton/StickyRoundButton";
 import { getBooksdata } from "../../../store/actions/books-actions";
 import { useAppSelector, useAppDispatch } from "../../../store/hooks";
 import BookShelves from "../bookShelves/BookShelves";
@@ -38,14 +38,16 @@ const AllBooks: React.FC = () => {
           )}
         </div>
       </div>
-      <StickyButton
-        containerClass=""
+      <StickyRoundButton
+        bottom={25}
+        right={25}
+        buttonRadius={50}
         buttonColor="#2e7d32"
         onClick={searchBookHandler}
         tooltipText="Add a book"
       >
         <div className={classes["open-search-img"]}></div>
-      </StickyButton>
+      </StickyRoundButton>
     </div>
   );
 };

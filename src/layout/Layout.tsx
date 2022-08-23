@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { notificationsActions } from "../store/reducers/notifications-slice";
-import SnackbarAlert from "../components/ui/snackbarAlert/SnackbarAlert";
+import SnackbarAlert from "../components/snackbarAlert/SnackbarAlert";
 import classes from "./Layout.module.css";
 
 const Layout: React.FC<{ children: any }> = props => {

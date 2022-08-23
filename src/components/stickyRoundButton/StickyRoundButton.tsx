@@ -1,22 +1,31 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import classes from "./StickyButton.module.css";
+import classes from "./StickyRoundButton.module.css";
 import { Tooltip } from "@mui/material";
 
-const StickyButton: React.FC<{
-  containerClass: string;
+const StickyRoundButton: React.FC<{
+  bottom: number;
+  right: number;
   tooltipText: string;
   children: any;
   onClick: () => void;
   buttonColor: string;
+  buttonRadius: number;
 }> = props => {
   return (
-    <div className={`${classes["button-container"]} ${props.containerClass}`}>
+    <div
+      className={classes["button-container"]}
+      style={{ bottom: props.bottom, right: props.right }}
+    >
       <Tooltip title={props.tooltipText}>
         <button
           type="button"
-          style={{ backgroundColor: props.buttonColor }}
+          style={{
+            backgroundColor: props.buttonColor,
+            width: props.buttonRadius,
+            height: props.buttonRadius
+          }}
           className={classes.button}
           onClick={props.onClick}
         >
@@ -27,12 +36,14 @@ const StickyButton: React.FC<{
   );
 };
 
-export default StickyButton;
+export default StickyRoundButton;
 
-StickyButton.propTypes = {
+StickyRoundButton.propTypes = {
   children: PropTypes.any.isRequired,
   tooltipText: PropTypes.string.isRequired,
-  containerClass: PropTypes.string.isRequired,
+  bottom: PropTypes.number.isRequired,
+  right: PropTypes.number.isRequired,
   buttonColor: PropTypes.string.isRequired,
+  buttonRadius: PropTypes.number.isRequired,
   onClick: PropTypes.func.isRequired
 };

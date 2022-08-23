@@ -1,0 +1,20 @@
+.search-books-bar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 5;
+}
+
+.close-search-img {
+  height: 100%;
+  width: 100%;
+  background-image: url("../../../assets/icons/arrow-back.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 28px;
+}
+
+.search-books-results {
+  padding: 80px 10px 20px;
+}

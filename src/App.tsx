@@ -1,5 +1,3 @@
-import "./App.css";
-
 import AppRoute from "./AppRoute";
 import Layout from "./layout/Layout";
 

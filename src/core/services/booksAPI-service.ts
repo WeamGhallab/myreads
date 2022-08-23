@@ -24,7 +24,7 @@ export const getAll = () =>
     .then(res => res.json())
     .then(data => data.books);
 
-export const update = (book: Book, shelf: any) =>
+export const update = (book: Book, shelf: string) =>
   fetch(`${api}/books/${book.id}`, {
     method: "PUT",
     headers: {
@@ -34,7 +34,7 @@ export const update = (book: Book, shelf: any) =>
     body: JSON.stringify({ shelf })
   }).then(res => res.json());
 
-export const search = (query: string, maxResults: any) =>
+export const search = (query: string, maxResults: number) =>
   fetch(`${api}/search`, {
     method: "POST",
     headers: {

@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 
 import BookDetailsPage from "./pages/BookDetailsPage";
 import BooksListPage from "./pages/BooksListPage";
-import BooksSearchPage from "./pages/BooksSearchPage";
+import BookSearchPage from "./pages/BookSearchPage";
 
 const AppRoute: React.FC = () => {
   return (
@@ -18,7 +18,7 @@ const AppRoute: React.FC = () => {
         <BookDetailsPage />
       </Route>
       <Route path="/search">
-        <BooksSearchPage />
+        <BookSearchPage />
       </Route>
       <Route path="*">
         <div className="centered text-centered">
