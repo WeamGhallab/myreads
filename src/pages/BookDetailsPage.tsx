@@ -1,7 +1,7 @@
-import AllBooks from "../features/core/allBooks/AllBooks";
+import BookItemDetails from "../features/core/bookItemDetails/BookItemDetails";
 
 const BookDetailsPage: React.FC = () => {
-  return <AllBooks />;
+  return <BookItemDetails />;
 };
 
 export default BookDetailsPage;

@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import classes from "./BookItem.module.css";
 import { Book } from "../../../core/models/book-model";
+import { Link } from "react-router-dom";
 
 const BookItem: React.FC<{ book: Book }> = props => {
   return (
@@ -11,9 +12,7 @@ const BookItem: React.FC<{ book: Book }> = props => {
         <div
           className={classes["book-cover"]}
           style={{
-            width: 128,
-            height: 192,
-            backgroundImage: props.book.cover
+            backgroundImage: `url(${props.book.imageLinks.smallThumbnail})`
           }}
         ></div>
         <div className={classes["book-shelf-changer"]}>
@@ -28,8 +27,14 @@ const BookItem: React.FC<{ book: Book }> = props => {
           </select>
         </div>
       </div>
-      <div className={classes["book-title"]}>{props.book.title}</div>
-      <div className={classes["book-authors"]}>{props.book.author}</div>
+      <div className={classes["book-title"]}>
+        <Link to={`/books/${props.book.id}`}>{props.book.title}</Link>
+      </div>
+      {props.book.authors.map(name => (
+        <div key={name} className={classes["book-authors"]}>
+          {name}
+        </div>
+      ))}
     </div>
   );
 };
