@@ -1,19 +1,18 @@
 import React from "react";
-import PropTypes from "prop-types";
 
-import { Book } from "../../../core/models/book-model";
 import { useAppSelector } from "../../../store/hooks";
 import BookShelf from "../../shared/bookShelf/BookShelf";
 
-const BookShelves: React.FC<{ bookList: Book[] }> = props => {
+const BookShelves: React.FC= () => {
   const bookShelves=useAppSelector(state=>state.books.bookShelves);
+  const bookList=useAppSelector(state=>state.books.books);
 
   return (
     <React.Fragment>
       {bookShelves.map(item => (
         <BookShelf
           key={item}
-          bookList={props.bookList.filter(book => book.shelf === item)}
+          bookList={bookList.filter(book => book.shelf === item)}
           shelfTitle={item}
         />
       ))}
@@ -23,6 +22,3 @@ const BookShelves: React.FC<{ bookList: Book[] }> = props => {
 
 export default BookShelves;
 
-BookShelves.propTypes = {
-  bookList: PropTypes.any.isRequired
-};

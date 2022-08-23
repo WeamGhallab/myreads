@@ -26,12 +26,15 @@ const BookSearchResults: React.FC<{ searchValue: string }> = props => {
       dispatch(notificationsActions.clear());
       setfilteredBooks(data);
     };
-    if (searchInputValue.trim()) {
+    if (searchInputValue) {
       timeoutRef = setTimeout(() => {
         updateBook().catch(error => {
           dispatch(notificationsActions.getError(error.message));
+          setfilteredBooks([]);
         });
       }, 1000);
+    } else {
+      setfilteredBooks([]);
     }
     return () => {
       timeoutRef && clearTimeout(timeoutRef);

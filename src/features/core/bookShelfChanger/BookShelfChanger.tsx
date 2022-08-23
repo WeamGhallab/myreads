@@ -32,11 +32,13 @@ const BookShelfChanger: React.FC<{ book: Book }> = props => {
         Move to...
       </option>
       {bookShelves.map(item => (
-        <option value={item}>
+        <option key={item} value={item}>
           {BookShelvesEnum[item as keyof typeof BookShelvesEnum] || item}
         </option>
       ))}
-      <option value="none">None</option>
+      <option value="none">
+        None
+      </option>
     </select>
   );
 };

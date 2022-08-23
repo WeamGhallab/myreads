@@ -30,7 +30,7 @@ const AllBooks: React.FC = () => {
           <h1>My Reads</h1>
         </div>
         <div className={classes["list-books-content"]}>
-          {!showSpinner && <BookShelves bookList={books} />}
+          {!showSpinner && <BookShelves />}
           {showSpinner && (
             <div className="centered text-centered">
               <CircularProgress color="success" size="10rem" />
