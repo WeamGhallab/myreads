@@ -1,3 +1,6 @@
+import React from "react";
+import PropTypes from "prop-types";
+
 import { BookShelvesEnum } from "../../../core/enums/bookShelves-enum";
 import { Book } from "../../../core/models/book-model";
 import BookItem from "../../shared/bookItem/BookItem";
@@ -24,3 +27,8 @@ const BookShelf: React.FC<{ bookList: Book[]; shelfTitle: string }> = props => {
 };
 
 export default BookShelf;
+
+BookShelf.propTypes = {
+  bookList: PropTypes.any.isRequired,
+  shelfTitle: PropTypes.string.isRequired
+};

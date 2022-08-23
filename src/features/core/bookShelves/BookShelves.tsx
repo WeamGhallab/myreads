@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 import { Book } from "../../../core/models/book-model";
 import { useAppSelector } from "../../../store/hooks";
 import BookShelf from "../../shared/bookShelf/BookShelf";
@@ -20,3 +22,7 @@ const BookShelves: React.FC<{ bookList: Book[] }> = props => {
 };
 
 export default BookShelves;
+
+BookShelves.propTypes = {
+  bookList: PropTypes.any.isRequired
+};

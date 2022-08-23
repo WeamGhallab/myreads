@@ -8,14 +8,15 @@ export const getBooksdata = () => {
     const updateBook = async () => {
       dispatch(notificationsActions.sendRequest());
       const data = await getAll();
-      dispatch(notificationsActions.clear());
       dispatch(booksActions.addBooks(data));
+      //TODO: set book shelves from lookup API
       let bookShelves: string[] = [];
       data.forEach((element: Book) => {
         bookShelves.push(element.shelf);
       });
       bookShelves.length > 0 &&
         dispatch(booksActions.addBookShelves(Array.from(new Set(bookShelves))));
+      dispatch(notificationsActions.clear());
     };
     try {
       await updateBook();

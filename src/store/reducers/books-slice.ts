@@ -2,9 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import { Book } from "../../core/models/book-model";
 
+ //TODO: set book shelves from lookup API
+const INIT_BOOK_SHELVES_DATA = ["currentlyReading", "wantToRead", "read"];
+
 const initialState: { books: Book[]; bookShelves: string[] } = {
   books: [],
-  bookShelves: []
+  bookShelves: [...INIT_BOOK_SHELVES_DATA]
 };
 
 export const booksSlice = createSlice({
@@ -13,7 +16,7 @@ export const booksSlice = createSlice({
   reducers: {
     addBookShelves(state, action) {
       const bookShelves = action.payload;
-      state.bookShelves = bookShelves || [];
+      state.bookShelves = bookShelves || [...INIT_BOOK_SHELVES_DATA];
     },
     addBooks(state, action) {
       const books = action.payload;
@@ -24,6 +27,8 @@ export const booksSlice = createSlice({
       const bookIndex = state.books.findIndex(i => i.id === updatedBook.id);
       if (bookIndex > -1) {
         state.books[bookIndex].shelf = updatedBook.shelf;
+      } else if (state.books.length > 0) {
+        state.books.push(updatedBook);
       }
     }
   }

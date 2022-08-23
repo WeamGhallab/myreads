@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 import classes from "./BookItem.module.css";
 import { Book } from "../../../core/models/book-model";
-import { Link } from "react-router-dom";
 import dummyBookImage from "../../../assets/images/book.jpg";
+import BookShelfChanger from "../../core/bookShelfChanger/BookShelfChanger";
 
 const BookItem: React.FC<{ book: Book }> = props => {
   return (
@@ -21,15 +22,7 @@ const BookItem: React.FC<{ book: Book }> = props => {
           }}
         ></div>
         <div className={classes["book-shelf-changer"]}>
-          <select>
-            <option value="none" disabled>
-              Move to...
-            </option>
-            <option value="currentlyReading">Currently Reading</option>
-            <option value="wantToRead">Want to Read</option>
-            <option value="read">Read</option>
-            <option value="none">None</option>
-          </select>
+          <BookShelfChanger book={props.book} />
         </div>
       </div>
       <div className={classes["book-title"]}>

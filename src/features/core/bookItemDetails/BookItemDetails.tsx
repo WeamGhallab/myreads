@@ -35,7 +35,7 @@ const BookItemDetails: React.FC = () => {
   if (showSpinner || !bookData) {
     return (
       <div className="centered text-centered">
-        <CircularProgress size="10rem" />
+        <CircularProgress color="success" size="10rem" />
       </div>
     );
   }
