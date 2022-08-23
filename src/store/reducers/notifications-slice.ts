@@ -23,6 +23,12 @@ export const notificationsSlice = createSlice({
       state.message = null;
       state.status = undefined;
     },
+    sendRequestWithoutSpinner(state) {
+      state.showNotification = false;
+      state.showSpinner = false;
+      state.message = null;
+      state.status = undefined;
+    },
     getResponse(state) {
       state.showNotification = true;
       state.showSpinner = false;

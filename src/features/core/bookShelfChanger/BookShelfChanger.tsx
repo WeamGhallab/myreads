@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 import classes from "./BookShelfChanger.module.css";
@@ -9,11 +9,24 @@ import { BookShelvesEnum } from "../../../core/enums/bookShelves-enum";
 
 const BookShelfChanger: React.FC<{ book: Book }> = props => {
   const { book } = props;
-  const [selectedShelfValue, setSelectedShelfValue] = useState(
-    book.shelf || "none"
+  const [selectedShelfValue, setSelectedShelfValue] = useState<string>(
+    book.shelf
   );
   const dispatch = useAppDispatch();
+  const books = useAppSelector(state => state.books.books);
   const bookShelves = useAppSelector(state => state.books.bookShelves);
+
+  useEffect(() => {
+    if (!book.shelf) {
+      const categorizedBook = books.find(item => item.id === book.id);
+      if (categorizedBook) {
+        book.shelf = categorizedBook.shelf;
+      } else {
+        book.shelf = "none";
+      }
+      setSelectedShelfValue(book.shelf);
+    }
+  }, [book, books]);
 
   const changeBookShelfHandler = (event: any) => {
     const selectedValue = event.target.value;

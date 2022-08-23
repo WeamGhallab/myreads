@@ -29,7 +29,7 @@ export const getBooksdata = () => {
 export const updateBookdata = (book: Book, shelf: string) => {
   return async (dispatch: any) => {
     const updateBook = async () => {
-      dispatch(notificationsActions.sendRequest());
+      dispatch(notificationsActions.sendRequestWithoutSpinner());
       await update(book, shelf);
       dispatch(notificationsActions.getResponse());
       dispatch(booksActions.updateBookShelf({ ...book, shelf: shelf }));
