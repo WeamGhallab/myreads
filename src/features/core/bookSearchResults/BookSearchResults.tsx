@@ -48,7 +48,7 @@ const BookSearchResults: React.FC<{ searchValue: string }> = props => {
         filteredBooks.length > 0 &&
         filteredBooks.map(item => (
           <li key={item.id}>
-            <BookItem book={item} />
+            <BookItem book={item} showRating={false} />
           </li>
         ))}
       {showSpinner && (

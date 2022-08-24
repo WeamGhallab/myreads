@@ -1,0 +1,8 @@
+.container {
+  padding: 0.5rem;
+}
+
+.book-cover {
+  display: flex;
+  justify-content: center;
+}

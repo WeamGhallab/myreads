@@ -6,9 +6,10 @@ import classes from "./BookItem.module.css";
 import { Book } from "../../../core/models/book-model";
 import dummyBookImage from "../../../assets/images/book.jpg";
 import BookShelfChanger from "../../core/bookShelfChanger/BookShelfChanger";
+import { Rating } from "@mui/material";
 
-const BookItem: React.FC<{ book: Book }> = props => {
-  const { book } = props;
+const BookItem: React.FC<{ book: Book; showRating: boolean }> = props => {
+  const { book, showRating } = props;
 
   return (
     <div className={classes["book"]}>
@@ -34,6 +35,10 @@ const BookItem: React.FC<{ book: Book }> = props => {
             {name}
           </div>
         ))}
+      {showRating && (
+        <Rating name="read-only" value={book.averageRating} readOnly />
+      )}
+      {showRating && <i>vote: {book.ratingsCount || 0}</i>}
     </div>
   );
 };
@@ -41,5 +46,6 @@ const BookItem: React.FC<{ book: Book }> = props => {
 export default BookItem;
 
 BookItem.propTypes = {
-  book: PropTypes.any.isRequired
+  book: PropTypes.any.isRequired,
+  showRating: PropTypes.bool.isRequired
 };

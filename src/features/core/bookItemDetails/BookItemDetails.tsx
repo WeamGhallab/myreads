@@ -6,6 +6,8 @@ import { Book } from "../../../core/models/book-model";
 import { getSingle } from "../../../core/services/booksAPI-service";
 import { useAppSelector, useAppDispatch } from "../../../store/hooks";
 import { notificationsActions } from "../../../store/reducers/notifications-slice";
+import BookItem from "../../shared/bookItem/BookItem";
+import classes from "./BookItemDetails.module.css";
 
 const BookItemDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -41,9 +43,20 @@ const BookItemDetails: React.FC = () => {
   }
 
   return (
-    <Card className="centered text-centered">
-      <h2>{bookData.title}</h2>
-      <p>{bookData.description}</p>
+    <Card className={`centered text-centered ${classes.container}`}>
+      <div>
+        <h2>{bookData.title}</h2>
+        <p className={classes["book-publish-data"]}>
+          Publisher: {bookData.publisher} - <i>"{bookData.publishedDate}"</i>
+        </p>
+        <a href={bookData.previewLink}>Preview</a>
+        <div className={classes["book-cover"]}>
+          <BookItem book={bookData} showRating={true} />
+        </div>
+        <div>
+          <p>{bookData.description}</p>
+        </div>
+      </div>
     </Card>
   );
 };

@@ -17,7 +17,7 @@ const BookShelf: React.FC<{ bookList: Book[]; shelfTitle: string }> = props => {
         <ol className={classes["books-grid"]}>
           {bookList.map(item => (
             <li key={item.id}>
-              <BookItem book={item} />
+              <BookItem book={item} showRating={false} />
             </li>
           ))}
         </ol>
