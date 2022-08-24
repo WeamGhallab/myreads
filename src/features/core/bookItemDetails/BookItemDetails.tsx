@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Card, CircularProgress } from "@mui/material";
 
 import { Book } from "../../../core/models/book-model";
@@ -43,19 +43,22 @@ const BookItemDetails: React.FC = () => {
   }
 
   return (
-    <Card className={`centered text-centered ${classes.container}`}>
-      <div>
+    <Card className="centered text-centered">
+      <div className={classes.container}>
         <h2>{bookData.title}</h2>
         <p className={classes["book-publish-data"]}>
           Publisher: {bookData.publisher} - <i>"{bookData.publishedDate}"</i>
         </p>
-        <a href={bookData.previewLink}>Preview</a>
+        <p className={classes["book-pages-data"]}>
+          {bookData.pageCount || 0} pages - <a href={bookData.previewLink}>Preview</a>
+        </p>
         <div className={classes["book-cover"]}>
           <BookItem book={bookData} showRating={true} />
         </div>
         <div>
           <p>{bookData.description}</p>
         </div>
+        <Link to="/">Back</Link>
       </div>
     </Card>
   );
