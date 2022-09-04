@@ -9,9 +9,9 @@ import { BookShelvesEnum } from "../../../core/enums/bookShelves-enum";
 
 const BookShelfChanger: React.FC<{ book: Book }> = props => {
   const { book } = props;
-  const [selectedShelfValue, setSelectedShelfValue] = useState<string>(
-    book.shelf
-  );
+  const [selectedShelfValue, setSelectedShelfValue] = useState<
+    string | undefined
+  >(book.shelf);
   const dispatch = useAppDispatch();
   const books = useAppSelector(state => state.books.books);
   const bookShelves = useAppSelector(state => state.books.bookShelves);
@@ -38,6 +38,7 @@ const BookShelfChanger: React.FC<{ book: Book }> = props => {
 
   return (
     <select
+      data-testid="select"
       className={classes["bookshelf-select"]}
       onChange={changeBookShelfHandler}
       value={selectedShelfValue}
@@ -46,11 +47,13 @@ const BookShelfChanger: React.FC<{ book: Book }> = props => {
         Move to...
       </option>
       {bookShelves.map(item => (
-        <option key={item} value={item}>
+        <option key={item} value={item} data-testid={item}>
           {BookShelvesEnum[item as keyof typeof BookShelvesEnum] || item}
         </option>
       ))}
-      <option value="none">None</option>
+      <option value="none" data-testid="none">
+        None
+      </option>
     </select>
   );
 };

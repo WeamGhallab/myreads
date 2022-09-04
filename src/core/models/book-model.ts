@@ -2,8 +2,8 @@ export interface Book {
   id: string;
   title: string;
   subtitle: string;
-  authors: string[];
-  shelf: string;
+  authors?: string[];
+  shelf?: string;
   averageRating: number;
   canonicalVolumeLink: string;
   categories: string[];
@@ -17,7 +17,7 @@ export interface Book {
   publishedDate: string;
   publisher: string;
   ratingsCount: number;
-  imageLinks: { smallThumbnail: string; thumbnail: string };
+  imageLinks: { smallThumbnail: string; thumbnail: string } | null;
   industryIdentifiers: { type: string; identifier: string }[];
   panelizationSummary: {
     containsEpubBubbles: boolean;

@@ -12,7 +12,7 @@ export const getBooksdata = () => {
       //TODO: set book shelves from lookup API
       let bookShelves: string[] = [];
       data.forEach((element: Book) => {
-        bookShelves.push(element.shelf);
+        element.shelf && bookShelves.push(element.shelf);
       });
       bookShelves.length > 0 &&
         dispatch(booksActions.addBookShelves(Array.from(new Set(bookShelves))));
